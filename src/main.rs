@@ -8,22 +8,30 @@ fn main() {
     let mut one_behind: u32 = 1;
 
     let mut nth = String::new();
-    loop{
-        println!("Which number in the Fibonnaci sequence do you want?");
 
-        io::stdin
-            .read_line(&mut nth)
-            .expect("Failed to read line");
+    println!("Which number in the Fibonnaci sequence do you want?");
 
-        let nth = match nth.trim().parse(){
-            Ok(char) => char;
-            Err(_) => continue;
-        }
-        break;
+    io::stdin()
+        .read_line(&mut nth)
+        .expect("Failed to read line");
+
+    let nth:u32 = match nth.trim().parse(){
+        Ok(num) => num,
+        Err(_) => 0,
+    };
+
+    if nth == 0 {
+        println!("The {nth} Fibonacci number is {two_behind}");
+        return;
+    }
+    if nth == 1 {
+        println!("The {nth} Fibonacci number is {one_behind}");
+        return;
     }
 
-    for number in (0..n-2) {
-        let mut curr = two_behind + one_behind;
+
+    for _number in 0..(nth-2) {
+        let curr = two_behind + one_behind;
         two_behind = one_behind;
         one_behind = curr;
     }
